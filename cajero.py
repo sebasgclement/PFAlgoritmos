@@ -118,7 +118,28 @@ def retirar(saldo, monto):
         retirar(50000, -500)  → (50000,   "✗ El monto debe ser mayor a 0.", False)
         retirar(50000, 0)     → (50000,   "✗ El monto debe ser mayor a 0.", False)
     """
-    pass  # ← GRUPO 3: reemplazar este pass con el código
+    
+    if monto <= 0:
+        return (saldo, "✗ El monto debe ser mayor a 0.", False)
+    
+    
+    comision = monto * 0.005
+    total_descuento = monto + comision
+    
+    
+    if total_descuento > saldo:
+        return (saldo, "✗ Fondos insuficientes.", False)
+    
+   
+    nuevo_saldo = saldo - total_descuento
+    
+    
+    monto_fmt = f"{monto:,.2f}".replace(",", "X").replace(".", ",").replace("X", ".")
+    comision_fmt = f"{comision:,.2f}".replace(",", "X").replace(".", ",").replace("X", ".")
+    
+    mensaje = f"✓ Retiro de ${monto_fmt} OK. Comisión: ${comision_fmt}"
+    
+    return (float(nuevo_saldo), mensaje, True)  # ← GRUPO 3: reemplazar este pass con el código
 
 
 def depositar(saldo, monto):
