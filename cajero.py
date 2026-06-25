@@ -149,32 +149,16 @@ def depositar(saldo, monto):
 
 
 def generar_resumen(n_dep, n_ret, total_dep, total_ret, saldo_final):
-    """
-    GRUPO 5 — Resumen de sesión
-    ────────────────────────────
-    Genera el texto completo del resumen al cerrar la sesión.
-
-    Parámetros:
-        n_dep       (int)  : cantidad de depósitos realizados
-        n_ret       (int)  : cantidad de retiros realizados
-        total_dep   (float): suma total de todos los depósitos
-        total_ret   (float): suma total de todos los retiros (sin comisión)
-        saldo_final (float): saldo al momento de cerrar sesión
-
-    Retorna:
-        str: el texto completo del resumen (usar \\n para saltos de línea)
-
-    Ejemplo de salida esperada:
-        ════ RESUMEN DE SESIÓN ════
-        Depósitos : 2  ($ 15.000,00)
-        Retiros   : 1  ($  5.000,00)
-        ──────────────────────────
-        Saldo final: $ 60.000,00
-        ¡Hasta pronto!
-
-    Pista: construir el string línea a línea con \\n entre cada una.
-    """
-    pass  # ← GRUPO 5: reemplazar este pass con el código
+    resumen = f"""
+======== RESUMEN DE SESIÓN ========
+Cantidad de depósitos: {n_dep}
+Cantidad de retiros: {n_ret}
+Total depositado: ${total_dep:.2f}
+Total retirado: ${total_ret:.2f}
+Saldo final: ${saldo_final:.2f}
+===================================
+"""
+    return resumen
 
 
 # ════════════════════════════════════════════════════════════
