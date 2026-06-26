@@ -125,25 +125,16 @@ def depositar(saldo, monto):
     """
     GRUPO 4 — Depósito de dinero
     ─────────────────────────────
-    Valida el monto y procesa el depósito.
-    Los depósitos no tienen comisión.
-
-    Parámetros:
-        saldo (float): saldo actual antes del depósito
-        monto (float): monto que el usuario quiere depositar
-
-    Retorna una tupla: (nuevo_saldo, mensaje, exito)
-        nuevo_saldo (float): saldo después de la operación
-        mensaje     (str)  : texto que se muestra en pantalla
-        exito       (bool) : True si la operación fue válida
-
-    Reglas de validación:
-        1. El monto debe ser mayor a 0
-
-    Ejemplos esperados:
-        depositar(50000, 5000) → (55000.0, "✓ Depósito de $5.000,00 OK. Saldo: $55.000,00", True)
-        depositar(50000, 0)    → (50000,   "✗ El monto debe ser mayor a 0.", False)
-        depositar(50000, -100) → (50000,   "✗ El monto debe ser mayor a 0.", False)
+    def depositar(saldo , monto):
+      if monto >0: 
+       nuevo_saldo = saldo + monto 
+       mensaje = "Depósito realizado con éxito".
+       exito = True
+      else: 
+       nuevo_saldo = saldo
+       mensaje = "Error: El monto a depositar debe ser mayor a cero".
+       exito = False 
+      return nuevo_saldo,mensaje,exito
     """
     pass  # ← GRUPO 4: reemplazar este pass con el código
 
