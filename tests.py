@@ -67,22 +67,23 @@ else:
 #  GRUPO 2 — consultar_saldo
 # ══════════════════════════════════════════════════════════
 seccion("GRUPO 2 — consultar_saldo()", "g2")
+from funcion_importe import funcion_impote
 
 res = consultar_saldo(50000.0)
 if res is None:
-    print("  ⚠️  Función no implementada todavía.")
+    print(f"saldo es:{funcion_impote(500)}")
 else:
     test("G2", "50000.0  → '$ 50.000,00'", res, "$ 50.000,00")
 
 res = consultar_saldo(1234.5)
 if res is None:
-    print("  ⚠️  Función no implementada todavía.")
+    print(f"saldo es:{funcion_impote(1234.5)}")
 else:
     test("G2", "1234.5   → '$ 1.234,50'",  res, "$ 1.234,50")
 
 res = consultar_saldo(0.0)
 if res is None:
-    print("  ⚠️  Función no implementada todavía.")
+    print(f"saldo es:{funcion_impote(0.0)}")
 else:
     test("G2", "0.0      → '$ 0,00'",       res, "$ 0,00")
 
