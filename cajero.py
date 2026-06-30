@@ -136,7 +136,7 @@ def depositar(saldo, monto):
        exito = False 
       return nuevo_saldo,mensaje,exito
     """
-    pass  # ← GRUPO 4: reemplazar este pass con el código
+    
 
 
 def generar_resumen(n_dep, n_ret, total_dep, total_ret, saldo_final):
