@@ -5,7 +5,7 @@
 ╠══════════════════════════════════════════════════════════════╣
 ║  INSTRUCCIONES PARA LOS GRUPOS:                              ║
 ║                                                              ║
-║  Busquen el comentario  # ← GRUPO X                         ║
+║  Busquen el comentario  # ← GRUPO X                          ║
 ║  Implementen su función SIN modificar nada más.              ║
 ║  Para probar: corran el archivo y usen la interfaz.          ║
 ║                                                              ║
@@ -63,7 +63,18 @@ def verificar_pin(pin_ingresado, intentos_usados):
         verificar_pin(9999, 2) → (False, "PIN incorrecto. Te queda 1 intento.", False)
         verificar_pin(9999, 3) → (False, "✗ Tarjeta bloqueada por seguridad.", True)
     """
-    pass  # ← GRUPO 1: reemplazar este pass con el código
+    if pin_ingresado == PIN_CORRECTO:
+        return (True, "✓ Acceso concedido. Bienvenido/a.", False)
+
+    intentos_restantes = MAX_INTENTOS - intentos_usados
+
+    if intentos_restantes <= 0:
+        return (False, "✗ Tarjeta bloqueada por seguridad.", True)
+
+    if intentos_restantes == 1:
+        return (False, "PIN incorrecto. Te queda 1 intento.", False)
+
+    return (False, f"PIN incorrecto. Te quedan {intentos_restantes} intentos.", False)
 
 
 def consultar_saldo(saldo):
@@ -88,7 +99,7 @@ def consultar_saldo(saldo):
     Pista: investigar f-strings con formato numérico, o
            usar el método str.replace() para adaptar el formato.
     """
-    pass  # ← GRUPO 2: reemplazar este pass con el código
+    return f"$ {saldo:,.2f}".replace(",", "X").replace(".", ",").replace("X", ".")
 
 
 def retirar(saldo, monto):
@@ -118,7 +129,22 @@ def retirar(saldo, monto):
         retirar(50000, -500)  → (50000,   "✗ El monto debe ser mayor a 0.", False)
         retirar(50000, 0)     → (50000,   "✗ El monto debe ser mayor a 0.", False)
     """
-    pass  # ← GRUPO 3: reemplazar este pass con el código
+    if monto <= 0:
+        return (saldo, "✗ El monto debe ser mayor a 0.", False)
+
+    comision = monto * COMISION
+    total_descuento = monto + comision
+
+    if total_descuento > saldo:
+        return (saldo, "✗ Fondos insuficientes.", False)
+
+    nuevo_saldo = saldo - total_descuento
+
+    monto_fmt = f"{monto:,.2f}".replace(",", "X").replace(".", ",").replace("X", ".")
+    comision_fmt = f"{comision:,.2f}".replace(",", "X").replace(".", ",").replace("X", ".")
+    mensaje = f"✓ Retiro de ${monto_fmt} OK. Comisión: ${comision_fmt}"
+
+    return (float(nuevo_saldo), mensaje, True)
 
 
 def depositar(saldo, monto):
@@ -145,7 +171,15 @@ def depositar(saldo, monto):
         depositar(50000, 0)    → (50000,   "✗ El monto debe ser mayor a 0.", False)
         depositar(50000, -100) → (50000,   "✗ El monto debe ser mayor a 0.", False)
     """
-    pass  # ← GRUPO 4: reemplazar este pass con el código
+    if monto <= 0:
+        return (saldo, "✗ El monto debe ser mayor a 0.", False)
+
+    nuevo_saldo = saldo + monto
+    monto_fmt = f"{monto:,.2f}".replace(",", "X").replace(".", ",").replace("X", ".")
+    saldo_fmt = f"{nuevo_saldo:,.2f}".replace(",", "X").replace(".", ",").replace("X", ".")
+    mensaje = f"✓ Depósito de ${monto_fmt} OK. Saldo: ${saldo_fmt}"
+
+    return (float(nuevo_saldo), mensaje, True)
 
 
 def generar_resumen(n_dep, n_ret, total_dep, total_ret, saldo_final):
@@ -174,7 +208,18 @@ def generar_resumen(n_dep, n_ret, total_dep, total_ret, saldo_final):
 
     Pista: construir el string línea a línea con \\n entre cada una.
     """
-    pass  # ← GRUPO 5: reemplazar este pass con el código
+    def fmt(n):
+        return f"{n:,.2f}".replace(",", "X").replace(".", ",").replace("X", ".")
+
+    resumen = (
+        f"════ RESUMEN DE SESIÓN ════\n"
+        f"Depósitos : {n_dep}  ($ {fmt(total_dep)})\n"
+        f"Retiros   : {n_ret}  ($ {fmt(total_ret)})\n"
+        f"──────────────────────────\n"
+        f"Saldo final: $ {fmt(saldo_final)}\n"
+        f"¡Hasta pronto!"
+    )
+    return resumen
 
 
 # ════════════════════════════════════════════════════════════
